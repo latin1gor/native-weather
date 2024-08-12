@@ -9,17 +9,26 @@ import {
 
 import { StatusBar } from "expo-status-bar";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
-import { useState } from "react";
+import {useCallback, useState} from "react";
 import { MapPinIcon } from "react-native-heroicons/mini";
 import Forecast from "@/components/forecast/forecast";
+import {debounce} from "@/lib/utils"
 
 export default function HomeScreen() {
   const [showSearch, setShowSearch] = useState(false);
   const [locations] = useState([1, 2, 3]);
 
+
   const handleLocation = (location: number) => {
     console.log(location);
   };
+
+  const handleSearch = (value: string) => {
+    console.log(value)
+  }
+
+  const handleTextDebounce = useCallback(debounce(handleSearch, 1200), [])
+
 
   return (
     <View className="flex-1 relative">
@@ -37,6 +46,7 @@ export default function HomeScreen() {
           >
             {showSearch ? (
               <TextInput
+                  onChangeText={handleTextDebounce}
                 placeholder={"Search city"}
                 placeholderTextColor={"lightgray"}
                 className={"text-white text-base flex-1 pl-6 h-10"}
