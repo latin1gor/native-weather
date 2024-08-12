@@ -13,26 +13,27 @@ import {useCallback, useState} from "react";
 import { MapPinIcon } from "react-native-heroicons/mini";
 import Forecast from "@/components/forecast/forecast";
 import {debounce} from "@/lib/utils"
-import {fetchLocations} from "@/api/weather";
+import {fetchLocations, fetchWeatherForecast} from "@/api/weather";
 
-interface ILocations {
+interface ILocation {
   name: string;
   country: string;
 }
 
 export default function HomeScreen() {
   const [showSearch, setShowSearch] = useState(false);
-  const [locations, setLocations] = useState<ILocations | null>(null);
+  const [locations, setLocations] = useState<ILocation[] | null>(null);
 
 
-  const handleLocation = (location: number) => {
+  const handleLocation = (location: ILocation) => {
     setLocations(null)
+    fetchWeatherForecast({cityName: location.name, days: '7'}).then(data => {console.log(data)})
   };
 
   const handleSearch = (value: string) => {
     if (value.length > 2) {
-      fetchLocations({cityName: value}).then(locations => {
-        setLocations(locations);
+      fetchLocations({cityName: value}).then(data => {
+        setLocations(data);
       })
     }
   }
