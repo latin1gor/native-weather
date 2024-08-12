@@ -13,18 +13,28 @@ import {useCallback, useState} from "react";
 import { MapPinIcon } from "react-native-heroicons/mini";
 import Forecast from "@/components/forecast/forecast";
 import {debounce} from "@/lib/utils"
+import {fetchLocations} from "@/api/weather";
+
+interface ILocations {
+  name: string;
+  country: string;
+}
 
 export default function HomeScreen() {
   const [showSearch, setShowSearch] = useState(false);
-  const [locations] = useState([1, 2, 3]);
+  const [locations, setLocations] = useState<ILocations | null>(null);
 
 
   const handleLocation = (location: number) => {
-    console.log(location);
+    setLocations(null)
   };
 
   const handleSearch = (value: string) => {
-    console.log(value)
+    if (value.length > 2) {
+      fetchLocations({cityName: value}).then(locations => {
+        setLocations(locations);
+      })
+    }
   }
 
   const handleTextDebounce = useCallback(debounce(handleSearch, 1200), [])
@@ -59,7 +69,7 @@ export default function HomeScreen() {
               <MagnifyingGlassIcon size={"25"} color={"white"} />
             </TouchableOpacity>
           </View>
-          {locations.length > 0 && showSearch ? (
+          {locations && showSearch ? (
             <View className={"absolute w-full bg-gray-300 top-16 rounded-3xl"}>
               {locations.map((loc, i) => {
                 const showBorder = i + 1 != locations.length;
@@ -74,7 +84,7 @@ export default function HomeScreen() {
                   >
                     <MapPinIcon color={"gray"} />
                     <Text className={"text-black text-lg ml-2"}>
-                      London, United Kingdom
+                      {loc?.name} {loc?.country}
                     </Text>
                   </TouchableOpacity>
                 );
