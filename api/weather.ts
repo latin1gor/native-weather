@@ -2,11 +2,11 @@ import {apiKey} from "@/constants/weather";
 import axios from "axios";
 
 interface IWeatherParams {
-    cityName: string
-    days: string
+    cityName?: string
+    days? : string
 }
 
-const forecastEndpoint = (params: IWeatherParams) => `https://api.weatherapi.com/v1/forecast.json?${apiKey}&q=${params.cityName}&days=${params.days}&aqi=no&alerts=no`
+const forecastEndpoint = (params: IWeatherParams) => `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${params.cityName}&days=${params.days}&aqi=no&alerts=no`
 const locationsEndpoint = (params: IWeatherParams) => `https://api.weatherapi.com/v1/search.json?key=${apiKey}&q=${params.cityName}`
 
 const apiCall = async (endpoint: string) => {
