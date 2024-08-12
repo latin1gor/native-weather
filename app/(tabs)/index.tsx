@@ -23,7 +23,7 @@ interface ILocation {
 export default function HomeScreen() {
   const [showSearch, setShowSearch] = useState(false);
   const [locations, setLocations] = useState<ILocation[] | null>(null);
-  const [weather, setWeather] = useState(null)
+  const [weather, setWeather] = useState({})
 
   const handleLocation = (location: ILocation) => {
     setLocations(null)
