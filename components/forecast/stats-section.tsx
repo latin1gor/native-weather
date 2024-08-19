@@ -24,7 +24,9 @@ const StatsSection = ({weather}: IWeather) => {
             source={require("../../assets/images/sun-icon.png")}
             className={"w-6 h-6 fill-blue-500"}
           />
-          <Text className={"text-white font-semibold text-base"}>6:05 AM</Text>
+          <Text className={"text-white font-semibold text-base"}>
+            {weather?.forecast?.forecastday[0]?.astro?.sunrise}
+          </Text>
         </View>
       </View>
     </>
