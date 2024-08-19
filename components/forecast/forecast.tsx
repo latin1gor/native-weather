@@ -12,7 +12,7 @@ const Forecast = ({ weather }: IWeather) => {
   return (
     <View className={"mx-4 flex justify-around flex-1 mb-2"}>
       <CitySection weather={weather} />
-      <TemperatureSection />
+      <TemperatureSection weather={weather} />
       <StatsSection />
       <NextSection />
     </View>
