@@ -23,7 +23,7 @@ interface ILocation {
 export default function HomeScreen() {
   const [showSearch, setShowSearch] = useState(false);
   const [locations, setLocations] = useState<ILocation[] | null>(null);
-  const [weather, setWeather] = useState({})
+  const [weather, setWeather] = useState({country: '', location: ""})
 
   const handleLocation = (location: ILocation) => {
     setLocations(null)
@@ -40,8 +40,6 @@ export default function HomeScreen() {
   }
 
   const handleTextDebounce = useCallback(debounce(handleSearch, 1200), [])
-
-  const {location, current} = weather
 
   return (
     <View className="flex-1 relative">
@@ -95,7 +93,7 @@ export default function HomeScreen() {
             </View>
           ) : null}
         </View>
-        <Forecast />
+        <Forecast weather={weather} />
       </SafeAreaView>
     </View>
   );
