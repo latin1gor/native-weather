@@ -9,7 +9,7 @@ import {
 
 import { StatusBar } from "expo-status-bar";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import { MapPinIcon } from "react-native-heroicons/mini";
 import Forecast from "@/components/forecast/forecast";
 import {debounce} from "@/lib/utils"
@@ -23,7 +23,11 @@ interface ILocation {
 export default function HomeScreen() {
   const [showSearch, setShowSearch] = useState(false);
   const [locations, setLocations] = useState<ILocation[] | null>(null);
-  const [weather, setWeather] = useState({country: '', location: ""})
+  const [weather, setWeather] = useState({country: '', location: ''})
+
+  useEffect(() => {
+    fetchWeatherForecast({cityName: "Lviv Ukraine", days: '7'}).then((res) => setWeather(res))
+  },[])
 
   const handleLocation = (location: ILocation) => {
     setLocations(null)
