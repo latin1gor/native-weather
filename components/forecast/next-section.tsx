@@ -13,7 +13,11 @@ const NextSection = ({weather}: IWeather) => {
       </View>
       <ScrollView horizontal contentContainerStyle={{ paddingHorizontal: 15 }}>
 
-        {weather.forecast?.forecastday?.map((item: any) => (
+        {weather.forecast?.forecastday?.map((item: any) => {
+
+            const date = new Date(item?.date)
+            const dateName = date.toLocaleDateString("en-US", {weekday: 'long'})
+           return (
           <View
               key={item.date}
           className={
@@ -24,10 +28,10 @@ const NextSection = ({weather}: IWeather) => {
             source={weatherImages[item?.day?.condition?.text]}
             className={"w-11 h-11"}
         />
-        <Text className={"text-white text-base"}>{item?.date}</Text>
+        <Text className={"text-white text-base"}>{dateName}</Text>
         <Text className={"text-white font-semibold text-xl"}> {item.day?.avgtemp_c}&#176;</Text>
     </View>
-        ))}
+        )})}
 
 
 
