@@ -10,14 +10,14 @@ const StatsSection = ({weather}: IWeather) => {
             source={require("../../assets/images/wind-icon.png")}
             className={"w-6 h-6 fill-blue-500"}
           />
-          <Text className={"text-white font-semibold text-base"}>{weather.current.wind_kph}km</Text>
+          <Text className={"text-white font-semibold text-base"}>{weather.current?.wind_kph}km</Text>
         </View>
         <View className={"flex-row space-x-2 items-center"}>
           <Image
             source={require("../../assets/images/drop.png")}
             className={"w-6 h-6 fill-blue-500"}
           />
-          <Text className={"text-white font-semibold text-base"}>{weather.current.humidity}%</Text>
+          <Text className={"text-white font-semibold text-base"}>{weather.current?.humidity}%</Text>
         </View>
         <View className={"flex-row space-x-2 items-center"}>
           <Image

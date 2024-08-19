@@ -14,7 +14,7 @@ const Forecast = ({ weather }: IWeather) => {
       <CitySection weather={weather} />
       <TemperatureSection weather={weather} />
       <StatsSection weather={weather} />
-      <NextSection />
+      <NextSection weather={weather} />
     </View>
   );
 };

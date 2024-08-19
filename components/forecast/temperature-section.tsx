@@ -14,7 +14,7 @@ const TemperatureSection = ({weather}: IWeather) => {
         </View>
         <View className={"space-y-2"}>
           <Text className={"text-center font-bold text-white text-6xl ml-5"}>
-              {weather.current.temp_c}&#176;
+              {weather.current?.temp_c}&#176;
           </Text>
           <Text className={"text-center text-white text-xl tracking-widest"}>
               {weather.current?.condition?.text}
