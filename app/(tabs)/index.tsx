@@ -28,6 +28,7 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState<boolean>(true );
 
   useEffect( () => {
+    console.log("native-weather, 0.0.1")
     fetchFirstData()
   },[])
 
